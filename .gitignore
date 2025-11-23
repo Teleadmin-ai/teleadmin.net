@@ -1,0 +1,29 @@
+# Tokens GitHub - JAMAIS push (symlinks vers private/)
+.token
+.token-private
+
+# Dossier privé (repo séparé avec son propre git)
+private/
+
+# Symlink vers CLAUDE.md privé
+CLAUDE.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (si utilisation future)
+node_modules/
+.npm/
+
+# Logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*~
