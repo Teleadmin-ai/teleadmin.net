@@ -387,21 +387,20 @@
             color: var(--text);
         }
 
-        .arch-diagram {
+        .mermaid {
             background: var(--bg-dark);
             border-radius: 12px;
             padding: 2rem;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.85rem;
             overflow-x: auto;
-            white-space: pre;
-            line-height: 1.4;
-            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
         }
 
-        .arch-highlight {
-            color: var(--accent);
-            font-weight: bold;
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
         }
 
         /* About Section */
@@ -646,8 +645,9 @@
                 grid-template-columns: 1fr;
             }
 
-            .arch-diagram {
-                font-size: 0.65rem;
+            .mermaid {
+                min-height: 400px;
+                padding: 1rem;
             }
         }
 
@@ -667,6 +667,32 @@
             animation: fadeInUp 0.6s ease-out forwards;
         }
     </style>
+
+    <!-- Mermaid.js for diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#6366f1',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#4f46e5',
+                lineColor: '#22d3ee',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#0f172a',
+                background: '#0f172a',
+                mainBkg: '#1e293b',
+                secondBkg: '#0f172a',
+                textColor: '#e2e8f0',
+                fontSize: '16px',
+                nodeBorder: '#6366f1',
+                clusterBkg: '#1e293b',
+                clusterBorder: '#4f46e5',
+                edgeLabelBackground: '#1e293b'
+            }
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -824,27 +850,40 @@
             <!-- Architecture Diagram -->
             <div class="architecture">
                 <h3 data-i18n="arch.title">Architecture de l'Ecosysteme</h3>
-                <div class="arch-diagram">
-                    <span class="arch-highlight">TELEADMIN.NET</span>
-                            (Hub Central)
-                    Holding &amp; Support | Abonnements
-                                 │
-          ┌──────────────────────┼──────────────────────┐
-          │                      │                      │
-    TELEADMIN.EU          <span class="arch-highlight">CYBERPLACE.AI</span>          [FUTUR]
-     (Hosting)            (AI Resources)
-    OVH Partner                  │
-                                 │
-              ┌──────────────────┼──────────────────────┐
-              │                  │                      │
-        COGNITION4AI      COGNITION4CHAT         TELEADMIN.AI
-           .COM               .COM                [FUTUR]
-          R-JEPA           WebChat              AI Admin/Secu
-        World Model         Agent
-              │                  │
-              └────────┬─────────┘
-                       │
-              <span class="arch-highlight">Powered by R-JEPA</span>
+                <div class="mermaid">
+graph TD
+    HUB["🏢 TELEADMIN.NET<br/>(Hub Central)<br/>Holding & Support | Abonnements"]
+
+    HOSTING["🌐 TELEADMIN.EU<br/>(Hosting)<br/>OVH Partner"]
+    CYBER["📚 CYBERPLACE.AI<br/>(AI Resources)<br/>Support & Documentation"]
+    FUTURE1["🔮 [FUTUR]<br/>Projets à venir"]
+
+    AI["🧠 COGNITION4AI.COM<br/>R-JEPA<br/>World Model"]
+    CHAT["💬 COGNITION4CHAT.COM<br/>WebChat<br/>Agent"]
+    ADMIN["🛡️ TELEADMIN.AI<br/>[FUTUR]<br/>AI Admin/Sécu"]
+
+    RJEPA["⚡ Powered by R-JEPA"]
+
+    HUB --> HOSTING
+    HUB --> CYBER
+    HUB --> FUTURE1
+
+    CYBER --> AI
+    CYBER --> CHAT
+    CYBER --> ADMIN
+
+    AI --> RJEPA
+    CHAT --> RJEPA
+
+    classDef hubStyle fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#fff,font-weight:bold
+    classDef aiStyle fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
+    classDef futureStyle fill:#475569,stroke:#64748b,stroke-width:2px,color:#94a3b8,stroke-dasharray: 5 5
+    classDef powerStyle fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff,font-weight:bold
+
+    class HUB hubStyle
+    class CYBER,AI,CHAT aiStyle
+    class FUTURE1,ADMIN futureStyle
+    class RJEPA powerStyle
                 </div>
             </div>
         </section>
