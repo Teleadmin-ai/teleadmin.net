@@ -387,7 +387,7 @@
             color: var(--text);
         }
 
-        .mermaid {
+        pre.mermaid {
             background: var(--bg-dark);
             border-radius: 12px;
             padding: 2rem;
@@ -396,9 +396,10 @@
             justify-content: center;
             align-items: center;
             min-height: 500px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
-        .mermaid svg {
+        pre.mermaid svg {
             max-width: 100%;
             height: auto;
         }
@@ -645,7 +646,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .mermaid {
+            pre.mermaid {
                 min-height: 400px;
                 padding: 1rem;
             }
@@ -850,41 +851,48 @@
             <!-- Architecture Diagram -->
             <div class="architecture">
                 <h3 data-i18n="arch.title">Architecture de l'Ecosysteme</h3>
-                <div class="mermaid">
-graph TD
-    HUB["🏢 TELEADMIN.NET<br/>(Hub Central)<br/>Holding & Support | Abonnements"]
+                <pre class="mermaid">
+flowchart TB
+    subgraph HUB["🏢 TELEADMIN.NET - Hub Central"]
+        CENTRAL["<b>Holding & Support</b><br/>Gestion des Abonnements<br/>Point d'entrée unique"]
+    end
 
-    HOSTING["🌐 TELEADMIN.EU<br/>(Hosting)<br/>OVH Partner"]
-    CYBER["📚 CYBERPLACE.AI<br/>(AI Resources)<br/>Support & Documentation"]
-    FUTURE1["🔮 [FUTUR]<br/>Projets à venir"]
+    subgraph BRANCHES["🌐 Branches Principales"]
+        HOSTING["<b>TELEADMIN.EU</b><br/>Services d'Hébergement<br/>OVH Advanced Partner"]
+        CYBER["<b>CYBERPLACE.AI</b><br/>AI Resources & Support<br/>Documentation & Tutoriels"]
+        FUTURE["<b>FUTURS PROJETS</b><br/>Expansion à venir<br/>Innovation continue"]
+    end
 
-    AI["🧠 COGNITION4AI.COM<br/>R-JEPA<br/>World Model"]
-    CHAT["💬 COGNITION4CHAT.COM<br/>WebChat<br/>Agent"]
-    ADMIN["🛡️ TELEADMIN.AI<br/>[FUTUR]<br/>AI Admin/Sécu"]
+    subgraph PRODUCTS["🚀 Produits AI"]
+        AI["<b>COGNITION4AI.COM</b><br/>R-JEPA World Model<br/>Reasoning in Latent Space"]
+        CHAT["<b>COGNITION4CHAT.COM</b><br/>WebChat Agentique<br/>Conversational AI"]
+        ADMIN["<b>TELEADMIN.AI</b><br/>[EN DÉVELOPPEMENT]<br/>AI Admin & Security"]
+    end
 
-    RJEPA["⚡ Powered by R-JEPA"]
+    subgraph ENGINE["⚡ Moteur de Raisonnement"]
+        RJEPA["<b>R-JEPA Architecture</b><br/>Joint Embedding Predictive<br/>Foundation pour tous les agents"]
+    end
 
-    HUB --> HOSTING
-    HUB --> CYBER
-    HUB --> FUTURE1
+    HUB --> BRANCHES
+    HOSTING --> HUB
+    CYBER --> HUB
+    FUTURE --> HUB
 
-    CYBER --> AI
-    CYBER --> CHAT
-    CYBER --> ADMIN
+    BRANCHES --> PRODUCTS
+    AI --> PRODUCTS
+    CHAT --> PRODUCTS
+    ADMIN --> PRODUCTS
 
-    AI --> RJEPA
-    CHAT --> RJEPA
+    PRODUCTS --> ENGINE
+    AI -.->|powered by| RJEPA
+    CHAT -.->|powered by| RJEPA
+    ADMIN -.->|powered by| RJEPA
 
-    classDef hubStyle fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#fff,font-weight:bold
-    classDef aiStyle fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
-    classDef futureStyle fill:#475569,stroke:#64748b,stroke-width:2px,color:#94a3b8,stroke-dasharray: 5 5
-    classDef powerStyle fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff,font-weight:bold
-
-    class HUB hubStyle
-    class CYBER,AI,CHAT aiStyle
-    class FUTURE1,ADMIN futureStyle
-    class RJEPA powerStyle
-                </div>
+    style HUB fill:#1e1b4b,stroke:#6366f1,stroke-width:3px,color:#e2e8f0
+    style BRANCHES fill:#1e293b,stroke:#0ea5e9,stroke-width:2px,color:#e2e8f0
+    style PRODUCTS fill:#134e4a,stroke:#22c55e,stroke-width:3px,color:#e2e8f0
+    style ENGINE fill:#422006,stroke:#f59e0b,stroke-width:3px,color:#e2e8f0
+                </pre>
             </div>
         </section>
 
