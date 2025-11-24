@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Propos | Teleadmin</title>
+    <meta name="description" content="Decouvrez Teleadmin - Notre vision transhumaniste, notre technologie R-JEPA et notre fondateur Romain Provencal.">
+    <meta name="author" content="Romain Provencal">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://teleadmin.net/about.html">
+    <meta property="og:title" content="A Propos - Teleadmin">
+    <meta property="og:description" content="Notre vision, notre technologie R-JEPA et l'equipe derriere Teleadmin.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #22d3ee;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                var(--bg-dark);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .section p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .card h3 .icon {
+            margin-right: 0.75rem;
+        }
+
+        /* Founder */
+        .founder-card {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .founder-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .founder-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-info .title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Tech Features */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .tech-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tech-item h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .timeline-content h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .founder-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">🚀 Teleadmin</a>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/#ecosystem">Ecosysteme</a></li>
+                <li><a href="/about.html" class="active">A Propos</a></li>
+                <li><a href="https://github.com/Teleadmin-ai" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>A Propos de Teleadmin</h1>
+            <p>Notre vision, notre technologie et l'equipe qui construit l'avenir du raisonnement IA.</p>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <h3><span class="icon">🌟</span>Notre Vision</h3>
+                <p>
+                    Nous croyons en une societe cybernetique gouvernee par la raison et la science.
+                    Une societe ou l'intelligence artificielle augmente les capacites humaines plutot
+                    que de les remplacer.
+                </p>
+                <p>
+                    Le transhumanisme guide notre approche : utiliser la technologie pour transcender
+                    les limites actuelles de la cognition humaine, tout en preservant notre humanite.
+                </p>
+                <p>
+                    Notre ecosysteme de produits AI est concu pour demystifier l'intelligence artificielle
+                    et la rendre accessible a tous, des developpeurs aux entreprises.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <h3><span class="icon">🧠</span>Notre Technologie : R-JEPA</h3>
+                <p>
+                    <strong>R-JEPA</strong> (Reasoning Joint Embedding Predictive Architecture) est notre
+                    innovation fondamentale. Inspire des travaux de Yann LeCun sur les World Models,
+                    R-JEPA permet le raisonnement augmente en espace latent.
+                </p>
+                <p>
+                    Contrairement aux approches traditionnelles, R-JEPA ne predit pas directement
+                    les tokens suivants. Il opere dans un espace de representations abstraites,
+                    permettant une comprehension plus profonde du contexte et de l'intention.
+                </p>
+
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="icon">🔄</div>
+                        <h4>RERANK</h4>
+                        <p>Reordonne les reponses selon la coherence avec le world model</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="icon">🎯</div>
+                        <h4>NUDGE</h4>
+                        <p>Guide subtilement la generation vers des outputs plus pertinents</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="icon">📋</div>
+                        <h4>PLAN</h4>
+                        <p>Decompose les taches complexes en etapes logiques</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card founder-card">
+                <div class="founder-avatar">👨‍💻</div>
+                <div class="founder-info">
+                    <h3>Romain Provencal</h3>
+                    <p class="title">CEO, Data Scientist & Sysadmin</p>
+                    <p>
+                        Passionne par l'intersection de l'intelligence artificielle et de l'administration
+                        systeme, Romain combine expertise technique et vision strategique pour construire
+                        des solutions AI qui font la difference.
+                    </p>
+                    <p>
+                        Transhumaniste convaincu, il croit que la technologie doit servir a augmenter
+                        les capacites humaines et a construire un monde plus rationnel.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Notre Parcours</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Teleadmin.eu - Hosting</h4>
+                        <p>Debut en tant que partenaire OVHcloud Advanced pour l'hebergement web et l'infogerance serveurs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Cognition4AI - R-JEPA</h4>
+                        <p>Developpement du World Model R-JEPA pour le raisonnement augmente en espace latent.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Cognition4Chat - WebChat</h4>
+                        <p>Lancement du WebChat Agentique propulse par R-JEPA pour une IA conversationnelle augmentee.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>Cyberplace.ai - Resources</h4>
+                        <p>Creation du portail central pour la documentation, les SDKs et le support.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <h4>Teleadmin.net - Hub Central</h4>
+                        <p>Unification de l'ecosysteme sous un hub central pour la gestion des abonnements et du support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <h3><span class="icon">🤝</span>Partenariats</h3>
+                <p>
+                    <strong>OVHcloud Advanced Partner</strong> - Notre partenariat avec OVH nous permet
+                    d'offrir des solutions d'hebergement haute performance et une infrastructure cloud
+                    fiable pour nos produits AI.
+                </p>
+                <p>
+                    Nous travaillons egalement avec des partenaires technologiques pour continuer
+                    a innover dans le domaine du raisonnement augmente et des agents AI.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Teleadmin — Romain Provencal, CEO</p>
+        <p><a href="mailto:contact@teleadmin.net">contact@teleadmin.net</a> | <a href="https://github.com/Teleadmin-ai" target="_blank">GitHub</a></p>
+    </footer>
+</body>
+</html>
