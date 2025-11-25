@@ -800,16 +800,25 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--text);
             font-size: 1.5rem;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.2s;
+            z-index: 100;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-close:hover {
-            color: var(--text);
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
         .modal-content h2 {
@@ -1027,6 +1036,12 @@
         /* Tokens Modal */
         .modal-large {
             max-width: 600px;
+        }
+
+        /* Upgrade Modal - needs more width for 3 cards */
+        #upgrade-modal .modal-content {
+            max-width: 900px;
+            text-align: left;
         }
 
         .token-create-form {
@@ -2662,6 +2677,15 @@ flowchart TB
         // Deploy: cd cloudflare-workers/github-auth-proxy && wrangler deploy
         const CORS_PROXY_URL = 'https://github-auth-proxy.teleadmin.workers.dev';
         let deviceFlowInterval = null;
+
+        // Close modals when clicking outside (on overlay)
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
 
         // Check if user is already logged in
         function checkAuth() {
