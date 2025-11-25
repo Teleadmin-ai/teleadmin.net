@@ -2557,11 +2557,11 @@ flowchart TB
                 document.getElementById('dashboard-chat-plan').textContent = chatPlan.charAt(0).toUpperCase() + chatPlan.slice(1);
                 document.getElementById('dashboard-rjepa-plan').textContent = rjepaPlan.charAt(0).toUpperCase() + rjepaPlan.slice(1);
 
-                // Hide upgrade button for owner
-                const upgradeBtn = document.getElementById('btn-upgrade-main');
-                if (upgradeBtn && (chatPlan === 'owner' || rjepaPlan === 'owner')) {
-                    upgradeBtn.style.display = 'none';
-                }
+                // Hide upgrade button for owner (TEMPORARILY DISABLED FOR TESTING)
+                // const upgradeBtn = document.getElementById('btn-upgrade-main');
+                // if (upgradeBtn && (chatPlan === 'owner' || rjepaPlan === 'owner')) {
+                //     upgradeBtn.style.display = 'none';
+                // }
 
                 // Handle organization membership
                 if (profile.organization_id) {
