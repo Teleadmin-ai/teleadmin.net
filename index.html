@@ -1571,8 +1571,12 @@ flowchart TB
                         document.getElementById('device-status').textContent =
                             currentLang === 'fr' ? 'En attente d\'autorisation...' : 'Waiting for authorization...';
                     } else if (data.error === 'slow_down') {
-                        // Need to slow down
-                        interval += 5;
+                        // Need to slow down - restart with new interval
+                        const newInterval = data.interval || interval + 5;
+                        console.log('Slowing down, new interval:', newInterval);
+                        clearInterval(deviceFlowInterval);
+                        pollForToken(deviceCode, newInterval);
+                        return; // Exit this interval
                     } else if (data.error === 'expired_token') {
                         clearInterval(deviceFlowInterval);
                         document.getElementById('device-status').textContent =
