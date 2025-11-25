@@ -1502,74 +1502,267 @@
         }
 
         /* Upgrade Modal */
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+        .modal-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
         }
 
-        .plan-card {
+        .upgrade-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .upgrade-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .upgrade-tab:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text);
+        }
+
+        .upgrade-tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .plans-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .plans-grid-upgrade {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .plans-grid-upgrade {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .plan-card-upgrade {
             background: var(--bg-dark);
             border: 2px solid rgba(99, 102, 241, 0.2);
             border-radius: 16px;
             padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
+            position: relative;
             transition: all 0.3s;
         }
 
-        .plan-card:hover {
+        .plan-card-upgrade:hover {
             border-color: var(--primary);
             transform: translateY(-4px);
         }
 
-        .plan-card.popular {
+        .plan-card-upgrade.popular {
             border-color: var(--warning);
-            position: relative;
         }
 
-        .plan-card.popular::before {
-            content: 'Popular';
+        .popular-badge {
             position: absolute;
-            top: -10px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--warning);
             color: var(--bg-dark);
-            padding: 0.2rem 0.75rem;
-            border-radius: 10px;
-            font-size: 0.7rem;
+            padding: 0.3rem 1rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
-        .plan-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text);
+        .plan-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .plan-header h3 {
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color: var(--text);
         }
 
-        .plan-price {
-            font-size: 2rem;
+        .plan-price-tag {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .plan-price-tag .price {
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent);
         }
 
-        .plan-price span {
+        .plan-price-tag .period {
             font-size: 0.9rem;
             color: var(--text-muted);
         }
 
-        .plan-features {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .plan-features-list {
             list-style: none;
+            margin-bottom: 1.5rem;
         }
 
-        .plan-features li {
-            margin-bottom: 0.5rem;
+        .plan-features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .plan-features-list li.disabled {
+            color: var(--text-muted);
+        }
+
+        .plan-features-list .check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .plan-features-list .cross {
+            color: var(--text-muted);
+        }
+
+        .btn-plan {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-current {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text-muted);
+            cursor: default;
+        }
+
+        .btn-subscribe {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Credits Section */
+        .credits-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .credits-section h4 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .credits-packs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .credit-pack {
+            background: var(--bg-dark);
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            position: relative;
+        }
+
+        .credit-pack:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .credits-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .credits-price {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .credits-discount {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Coming Soon Notice */
+        .coming-soon-notice {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .coming-soon-notice .notice-icon {
+            font-size: 1.5rem;
+        }
+
+        .coming-soon-notice p {
+            color: var(--text);
+            margin: 0.5rem 0 1rem;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            background: var(--bg-card);
+            color: var(--accent);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-contact:hover {
+            background: rgba(99, 102, 241, 0.2);
         }
     </style>
 
@@ -1755,6 +1948,180 @@
                 <button id="btn-upgrade-tokens" onclick="showUpgradeModal()" class="btn-small btn-upgrade">
                     Upgrader pour plus d'accès
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade/Plans Modal -->
+    <div id="upgrade-modal" class="modal hidden">
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeUpgradeModal()">&times;</button>
+            <h2>Choisir votre offre</h2>
+            <p class="modal-subtitle">Sélectionnez le produit et le plan qui correspond à vos besoins</p>
+
+            <!-- Product Tabs -->
+            <div class="upgrade-tabs">
+                <button class="upgrade-tab active" data-product="chat" onclick="switchUpgradeTab('chat')">
+                    💬 Cognition4Chat
+                </button>
+                <button class="upgrade-tab" data-product="rjepa" onclick="switchUpgradeTab('rjepa')">
+                    🧠 R-JEPA API
+                </button>
+            </div>
+
+            <!-- Chat Plans -->
+            <div id="chat-plans" class="plans-container">
+                <div class="plans-grid-upgrade">
+                    <!-- Free Plan -->
+                    <div class="plan-card-upgrade" data-plan="free">
+                        <div class="plan-header">
+                            <h3>Free</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">0€</span>
+                                <span class="period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> 1,000 messages/mois</li>
+                            <li><span class="check">✓</span> 1 token API</li>
+                            <li><span class="check">✓</span> Support communauté</li>
+                            <li class="disabled"><span class="cross">✗</span> Historique limité</li>
+                        </ul>
+                        <button class="btn-plan btn-current" disabled>Plan actuel</button>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="plan-card-upgrade popular" data-plan="pro">
+                        <div class="popular-badge">Populaire</div>
+                        <div class="plan-header">
+                            <h3>Pro</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">9€</span>
+                                <span class="period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> Messages illimités</li>
+                            <li><span class="check">✓</span> 1 token API</li>
+                            <li><span class="check">✓</span> Support prioritaire</li>
+                            <li><span class="check">✓</span> Historique complet</li>
+                            <li><span class="check">✓</span> Export conversations</li>
+                        </ul>
+                        <button class="btn-plan btn-subscribe" onclick="selectPlan('chat', 'pro')">Souscrire</button>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="plan-card-upgrade" data-plan="enterprise">
+                        <div class="plan-header">
+                            <h3>Enterprise</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">49€</span>
+                                <span class="period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> Messages illimités</li>
+                            <li><span class="check">✓</span> Jusqu'à 20 membres</li>
+                            <li><span class="check">✓</span> Support dédié</li>
+                            <li><span class="check">✓</span> SSO / SAML</li>
+                            <li><span class="check">✓</span> SLA 99.9%</li>
+                            <li><span class="check">✓</span> Facturation entreprise</li>
+                        </ul>
+                        <button class="btn-plan btn-subscribe" onclick="selectPlan('chat', 'enterprise')">Contacter</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RJEPA Plans -->
+            <div id="rjepa-plans" class="plans-container hidden">
+                <div class="plans-grid-upgrade">
+                    <!-- Free Plan -->
+                    <div class="plan-card-upgrade" data-plan="free">
+                        <div class="plan-header">
+                            <h3>Free</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">0€</span>
+                                <span class="period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> 10,000 crédits</li>
+                            <li><span class="check">✓</span> 1 token API</li>
+                            <li><span class="check">✓</span> Modes RERANK, NUDGE</li>
+                            <li class="disabled"><span class="cross">✗</span> Mode PLAN</li>
+                        </ul>
+                        <button class="btn-plan btn-current" disabled>Plan actuel</button>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="plan-card-upgrade popular" data-plan="pro">
+                        <div class="popular-badge">Populaire</div>
+                        <div class="plan-header">
+                            <h3>Pro</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">29€</span>
+                                <span class="period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> 100,000 crédits</li>
+                            <li><span class="check">✓</span> 5 tokens API</li>
+                            <li><span class="check">✓</span> Tous les modes</li>
+                            <li><span class="check">✓</span> Support prioritaire</li>
+                            <li><span class="check">✓</span> Webhooks</li>
+                        </ul>
+                        <button class="btn-plan btn-subscribe" onclick="selectPlan('rjepa', 'pro')">Souscrire</button>
+                    </div>
+
+                    <!-- Usage Plan -->
+                    <div class="plan-card-upgrade" data-plan="usage">
+                        <div class="plan-header">
+                            <h3>Usage</h3>
+                            <div class="plan-price-tag">
+                                <span class="price">0.001€</span>
+                                <span class="period">/crédit</span>
+                            </div>
+                        </div>
+                        <ul class="plan-features-list">
+                            <li><span class="check">✓</span> Paiement à l'usage</li>
+                            <li><span class="check">✓</span> 20 tokens API</li>
+                            <li><span class="check">✓</span> Tous les modes</li>
+                            <li><span class="check">✓</span> Auto-recharge</li>
+                            <li><span class="check">✓</span> Facturation entreprise</li>
+                        </ul>
+                        <button class="btn-plan btn-subscribe" onclick="selectPlan('rjepa', 'usage')">Configurer</button>
+                    </div>
+                </div>
+
+                <!-- Credits Pack -->
+                <div class="credits-section">
+                    <h4>Acheter des crédits supplémentaires</h4>
+                    <div class="credits-packs">
+                        <button class="credit-pack" onclick="buyCredits(50000)">
+                            <span class="credits-amount">50K</span>
+                            <span class="credits-price">45€</span>
+                        </button>
+                        <button class="credit-pack" onclick="buyCredits(200000)">
+                            <span class="credits-amount">200K</span>
+                            <span class="credits-price">160€</span>
+                            <span class="credits-discount">-20%</span>
+                        </button>
+                        <button class="credit-pack" onclick="buyCredits(1000000)">
+                            <span class="credits-amount">1M</span>
+                            <span class="credits-price">700€</span>
+                            <span class="credits-discount">-30%</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coming Soon Notice -->
+            <div class="coming-soon-notice">
+                <span class="notice-icon">🚧</span>
+                <p>Le paiement en ligne arrive bientôt ! En attendant, contactez-nous pour souscrire.</p>
+                <a href="mailto:contact@teleadmin.net" class="btn-contact">
+                    ✉️ contact@teleadmin.net
+                </a>
             </div>
         </div>
     </div>
@@ -2910,14 +3277,114 @@ flowchart TB
         }
 
         // ═══════════════════════════════════════════════════════════════════════
-        // UPGRADE MODAL (placeholder - waiting for jefacture.com)
+        // UPGRADE MODAL - SUBSCRIPTION PLANS
         // ═══════════════════════════════════════════════════════════════════════
 
+        let currentUpgradeProduct = 'chat';
+
         function showUpgradeModal() {
-            // For now, just show contact info
-            const msg = currentLang === 'fr'
-                ? 'Pour upgrader vers Pro ou Enterprise, contactez-nous :\n\nEmail: contact@teleadmin.net\n\nPlans disponibles :\n• Free: 1,000 appels/mois\n• Pro (9€/mois): 50,000 appels/mois\n• Enterprise (49€/mois): Illimité'
-                : 'To upgrade to Pro or Enterprise, contact us:\n\nEmail: contact@teleadmin.net\n\nAvailable plans:\n• Free: 1,000 calls/month\n• Pro (€9/month): 50,000 calls/month\n• Enterprise (€49/month): Unlimited';
+            document.getElementById('upgrade-modal').classList.remove('hidden');
+            updateCurrentPlanButtons();
+        }
+
+        function closeUpgradeModal() {
+            document.getElementById('upgrade-modal').classList.add('hidden');
+        }
+
+        function switchUpgradeTab(product) {
+            currentUpgradeProduct = product;
+
+            // Update tab styles
+            document.querySelectorAll('.upgrade-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.product === product);
+            });
+
+            // Show/hide plan containers
+            document.getElementById('chat-plans').classList.toggle('hidden', product !== 'chat');
+            document.getElementById('rjepa-plans').classList.toggle('hidden', product !== 'rjepa');
+
+            updateCurrentPlanButtons();
+        }
+
+        function updateCurrentPlanButtons() {
+            const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
+            const chatPlan = profile.subscriptions?.chat?.plan || profile.subscription?.plan || 'free';
+            const rjepaPlan = profile.subscriptions?.rjepa?.plan || profile.subscription?.plan || 'free';
+
+            // Update Chat plan buttons
+            document.querySelectorAll('#chat-plans .plan-card-upgrade').forEach(card => {
+                const planName = card.dataset.plan;
+                const btn = card.querySelector('.btn-plan');
+                if (planName === chatPlan) {
+                    btn.className = 'btn-plan btn-current';
+                    btn.textContent = 'Plan actuel';
+                    btn.disabled = true;
+                } else {
+                    btn.className = 'btn-plan btn-subscribe';
+                    btn.disabled = false;
+                    if (planName === 'enterprise') {
+                        btn.textContent = 'Contacter';
+                    } else {
+                        btn.textContent = 'Souscrire';
+                    }
+                }
+            });
+
+            // Update RJEPA plan buttons
+            document.querySelectorAll('#rjepa-plans .plan-card-upgrade').forEach(card => {
+                const planName = card.dataset.plan;
+                const btn = card.querySelector('.btn-plan');
+                if (planName === rjepaPlan) {
+                    btn.className = 'btn-plan btn-current';
+                    btn.textContent = 'Plan actuel';
+                    btn.disabled = true;
+                } else {
+                    btn.className = 'btn-plan btn-subscribe';
+                    btn.disabled = false;
+                    if (planName === 'usage') {
+                        btn.textContent = 'Configurer';
+                    } else {
+                        btn.textContent = 'Souscrire';
+                    }
+                }
+            });
+        }
+
+        function selectPlan(product, plan) {
+            // For now, show coming soon message with plan details
+            const planDetails = {
+                chat: {
+                    pro: { name: 'Chat Pro', price: '9€/mois', features: 'Messages illimités' },
+                    enterprise: { name: 'Chat Enterprise', price: '49€/mois', features: 'Équipe jusqu\'à 20 membres' }
+                },
+                rjepa: {
+                    pro: { name: 'R-JEPA Pro', price: '29€/mois', features: '100,000 crédits' },
+                    usage: { name: 'R-JEPA Usage', price: 'À l\'usage', features: 'Paiement par crédit consommé' }
+                }
+            };
+
+            const details = planDetails[product]?.[plan];
+            if (details) {
+                const msg = `Vous avez sélectionné: ${details.name}\n` +
+                           `Prix: ${details.price}\n` +
+                           `${details.features}\n\n` +
+                           `Le paiement en ligne arrive bientôt !\n` +
+                           `Contactez-nous pour souscrire dès maintenant:\n` +
+                           `contact@teleadmin.net`;
+                alert(msg);
+            }
+        }
+
+        function buyCredits(amount) {
+            const prices = {
+                50000: '45€',
+                200000: '160€ (-20%)',
+                1000000: '700€ (-30%)'
+            };
+            const msg = `Pack ${(amount/1000)}K crédits R-JEPA\n` +
+                       `Prix: ${prices[amount]}\n\n` +
+                       `Le paiement en ligne arrive bientôt !\n` +
+                       `Contactez-nous: contact@teleadmin.net`;
             alert(msg);
         }
 
