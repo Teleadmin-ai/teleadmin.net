@@ -1269,6 +1269,238 @@
             color: #ef4444;
         }
 
+        /* Product Cards */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .product-header h4 {
+            flex: 1;
+            margin: 0;
+        }
+
+        .product-icon {
+            font-size: 1.5rem;
+        }
+
+        .plan-badge {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .plan-badge.pro {
+            background: rgba(14, 165, 233, 0.2);
+            color: var(--secondary);
+        }
+
+        .plan-badge.enterprise, .plan-badge.owner {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--success);
+        }
+
+        .product-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .product-stats .stat {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .product-stats .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .product-stats .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        /* Subscription Summary */
+        .subscription-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .sub-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: var(--bg-dark);
+            border-radius: 8px;
+        }
+
+        .sub-line .value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Organization Section */
+        .dashboard-org {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .dashboard-org h3 {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .org-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .org-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .org-role {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            text-transform: capitalize;
+        }
+
+        /* Token Tabs */
+        .token-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .token-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .token-tab:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text);
+        }
+
+        .token-tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Token Sections */
+        .token-section {
+            margin-top: 1rem;
+        }
+
+        .token-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .token-section-header h4 {
+            margin: 0;
+        }
+
+        .token-info-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Create Token Form */
+        .create-token-form {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .create-token-form input {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--text);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .create-token-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Token Limit Info */
+        .token-limit-info {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Delete button for RJEPA tokens */
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
         /* Upgrade Modal */
         .plans-grid {
             display: grid;
@@ -1454,14 +1686,24 @@
     <div id="tokens-modal" class="modal hidden">
         <div class="modal-content modal-large">
             <button class="modal-close" onclick="closeTokensModal()">&times;</button>
-            <h2 data-i18n="tokens.title">API Tokens</h2>
-            <p data-i18n="tokens.description">Your API tokens are automatically assigned based on your subscription plan.</p>
+            <h2 id="tokens-modal-title">API Tokens</h2>
+            <p id="tokens-modal-desc">Gérez vos tokens API pour accéder aux services Teleadmin.</p>
 
-            <!-- New Token Display (shown after regeneration) -->
+            <!-- Product Tabs -->
+            <div class="token-tabs">
+                <button class="token-tab active" data-product="chat" onclick="switchTokenTab('chat')">
+                    💬 Chat
+                </button>
+                <button class="token-tab" data-product="rjepa" onclick="switchTokenTab('rjepa')">
+                    🧠 R-JEPA
+                </button>
+            </div>
+
+            <!-- New Token Display (shown after creation/regeneration) -->
             <div id="new-token-display" class="new-token-display hidden">
                 <div class="token-warning">
                     <span class="warning-icon">⚠️</span>
-                    <span data-i18n="tokens.copyWarning">Copy this token now! It won't be shown again.</span>
+                    <span>Copiez ce token maintenant ! Il ne sera plus affiché.</span>
                 </div>
                 <div class="token-value-container">
                     <code id="new-token-value" class="token-value"></code>
@@ -1469,19 +1711,49 @@
                 </div>
             </div>
 
-            <!-- Token List -->
-            <div class="token-list-container">
-                <h4 data-i18n="tokens.yourTokens">Your Tokens</h4>
-                <ul id="token-list" class="token-list">
-                    <li class="token-loading" data-i18n="tokens.loading">Loading tokens...</li>
+            <!-- Chat Tokens Section -->
+            <div id="chat-tokens-section" class="token-section">
+                <div class="token-section-header">
+                    <h4>Token Cognition4Chat</h4>
+                    <span class="token-info-text">1 token auto-attribué</span>
+                </div>
+                <ul id="chat-token-list" class="token-list">
+                    <li class="token-loading">Chargement...</li>
                 </ul>
+            </div>
+
+            <!-- RJEPA Tokens Section -->
+            <div id="rjepa-tokens-section" class="token-section hidden">
+                <div class="token-section-header">
+                    <h4>Tokens R-JEPA API</h4>
+                    <button id="btn-create-rjepa-token" class="btn-small" onclick="showCreateRjepaToken()">
+                        + Nouveau token
+                    </button>
+                </div>
+
+                <!-- Create RJEPA Token Form -->
+                <div id="create-rjepa-form" class="create-token-form hidden">
+                    <input type="text" id="rjepa-token-name" placeholder="Nom du token (ex: Production API)" maxlength="50">
+                    <div class="form-actions">
+                        <button class="btn-small" onclick="createRjepaToken()">Créer</button>
+                        <button class="btn-small btn-secondary-small" onclick="hideCreateRjepaToken()">Annuler</button>
+                    </div>
+                </div>
+
+                <ul id="rjepa-token-list" class="token-list">
+                    <li class="token-loading">Chargement...</li>
+                </ul>
+
+                <div class="token-limit-info" id="rjepa-limit-info">
+                    <span id="rjepa-tokens-count">0</span> / <span id="rjepa-tokens-max">1</span> tokens utilisés
+                </div>
             </div>
 
             <!-- Plan Info -->
             <div class="token-plan-info">
                 <p id="token-plan-message" class="plan-message"></p>
-                <button id="btn-upgrade-tokens" onclick="showUpgradeModal()" class="btn-small btn-upgrade" data-i18n="tokens.upgradeForMore">
-                    Upgrade for more access
+                <button id="btn-upgrade-tokens" onclick="showUpgradeModal()" class="btn-small btn-upgrade">
+                    Upgrader pour plus d'accès
                 </button>
             </div>
         </div>
@@ -1528,7 +1800,7 @@
         <section class="section dashboard-section hidden" id="dashboard">
             <div class="dashboard-header">
                 <h2 data-i18n="dashboard.title">Tableau de bord</h2>
-                <span class="hero-badge" id="dashboard-plan">Free</span>
+                <span class="hero-badge" id="dashboard-org-badge" style="display:none;"></span>
             </div>
 
             <div class="dashboard-grid">
@@ -1544,30 +1816,73 @@
                     </div>
                 </div>
 
-                <!-- API Usage Card -->
-                <div class="dashboard-card">
-                    <h4 data-i18n="dashboard.apiUsage">Utilisation API</h4>
-                    <div class="value" id="dashboard-api-calls">0</div>
-                    <div class="label"><span id="dashboard-api-limit">1,000</span> <span data-i18n="dashboard.callsPerMonth">appels/mois</span></div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="dashboard-api-progress" style="width: 0%"></div>
+                <!-- Cognition4Chat Product Card -->
+                <div class="dashboard-card product-card">
+                    <div class="product-header">
+                        <span class="product-icon">💬</span>
+                        <h4>Cognition4Chat</h4>
+                        <span class="plan-badge" id="chat-plan-badge">Free</span>
+                    </div>
+                    <div class="product-stats">
+                        <div class="stat">
+                            <div class="value" id="chat-messages-used">0</div>
+                            <div class="label">/ <span id="chat-messages-limit">1,000</span> messages</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="chat-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-small" onclick="showTokensModal('chat')">Token</button>
+                        <a href="https://cognition4chat.com" class="btn-small btn-secondary-small" target="_blank">Ouvrir</a>
                     </div>
                 </div>
 
-                <!-- Tokens Card -->
-                <div class="dashboard-card">
-                    <h4 data-i18n="dashboard.tokens">Tokens API</h4>
-                    <div class="value" id="dashboard-token-count">0</div>
-                    <div class="label" data-i18n="dashboard.activeTokens">tokens actifs</div>
-                    <button class="btn-small" onclick="showTokensModal()" data-i18n="dashboard.manageTokens">Gerer</button>
+                <!-- Cognition4AI (R-JEPA) Product Card -->
+                <div class="dashboard-card product-card">
+                    <div class="product-header">
+                        <span class="product-icon">🧠</span>
+                        <h4>R-JEPA API</h4>
+                        <span class="plan-badge" id="rjepa-plan-badge">Free</span>
+                    </div>
+                    <div class="product-stats">
+                        <div class="stat">
+                            <div class="value" id="rjepa-credits-used">0</div>
+                            <div class="label">/ <span id="rjepa-credits-limit">10,000</span> crédits</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="rjepa-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-small" onclick="showTokensModal('rjepa')">Tokens (<span id="rjepa-token-count">0</span>)</button>
+                        <a href="https://cognition4ai.com" class="btn-small btn-secondary-small" target="_blank">Docs</a>
+                    </div>
                 </div>
 
-                <!-- Subscription Card -->
+                <!-- Subscription/Upgrade Card -->
                 <div class="dashboard-card">
-                    <h4 data-i18n="dashboard.subscription">Abonnement</h4>
-                    <div class="value" id="dashboard-plan-name">Free</div>
-                    <div class="label" id="dashboard-plan-expires">-</div>
-                    <button class="btn-small btn-upgrade" onclick="showUpgradeModal()" data-i18n="dashboard.upgrade">Upgrader</button>
+                    <h4 data-i18n="dashboard.subscription">Abonnements</h4>
+                    <div class="subscription-summary">
+                        <div class="sub-line">
+                            <span>Chat:</span>
+                            <span class="value" id="dashboard-chat-plan">Free</span>
+                        </div>
+                        <div class="sub-line">
+                            <span>R-JEPA:</span>
+                            <span class="value" id="dashboard-rjepa-plan">Free</span>
+                        </div>
+                    </div>
+                    <button class="btn-small btn-upgrade" onclick="showUpgradeModal()" id="btn-upgrade-main" data-i18n="dashboard.upgrade">Upgrader</button>
+                </div>
+            </div>
+
+            <!-- Organization Section (if member) -->
+            <div class="dashboard-org hidden" id="dashboard-org-section">
+                <h3>Organisation</h3>
+                <div class="org-info">
+                    <div class="org-name" id="org-name">-</div>
+                    <div class="org-role" id="org-role">-</div>
                 </div>
             </div>
 
@@ -2191,38 +2506,79 @@ flowchart TB
                     return;
                 }
 
-                // Update dashboard with profile data
-                const plan = profile.subscription?.plan || 'free';
-                const planDisplay = plan.charAt(0).toUpperCase() + plan.slice(1);
-                const apiCalls = profile.usage?.api_calls || 0;
-                const apiLimit = profile.usage?.api_calls_limit || 1000;
-                const tokenCount = profile.tokens?.length || 0;
-                const expires = profile.subscription?.expires_at;
+                // Get subscriptions (new multi-product format)
+                const chatSub = profile.subscriptions?.chat || { plan: 'free', messages_used: 0, messages_limit: 1000 };
+                const rjepaSub = profile.subscriptions?.rjepa || { plan: 'free', credits: 10000, credits_used: 0 };
 
-                document.getElementById('dashboard-plan').textContent = planDisplay;
-                document.getElementById('dashboard-plan-name').textContent = planDisplay;
-                document.getElementById('dashboard-api-calls').textContent = apiCalls.toLocaleString();
-                document.getElementById('dashboard-api-limit').textContent = apiLimit.toLocaleString();
-                document.getElementById('dashboard-token-count').textContent = tokenCount;
-
-                // Update progress bar
-                const progress = (apiCalls / apiLimit) * 100;
-                document.getElementById('dashboard-api-progress').style.width = Math.min(progress, 100) + '%';
-
-                // Color progress bar based on usage
-                const progressBar = document.getElementById('dashboard-api-progress');
-                if (progress > 90) {
-                    progressBar.style.background = 'var(--warning)';
-                } else if (progress > 75) {
-                    progressBar.style.background = 'linear-gradient(135deg, var(--warning) 0%, var(--primary) 100%)';
+                // Fallback for old format
+                if (!profile.subscriptions && profile.subscription) {
+                    chatSub.plan = profile.subscription.plan || 'free';
+                    rjepaSub.plan = profile.subscription.plan || 'free';
                 }
 
-                if (expires) {
-                    document.getElementById('dashboard-plan-expires').textContent =
-                        currentLang === 'fr' ? 'Expire le ' + expires : 'Expires ' + expires;
-                } else {
-                    document.getElementById('dashboard-plan-expires').textContent =
-                        currentLang === 'fr' ? 'Pas d\'expiration' : 'No expiration';
+                const chatPlan = chatSub.plan || 'free';
+                const rjepaPlan = rjepaSub.plan || 'free';
+
+                // Update Chat product card
+                const chatPlanBadge = document.getElementById('chat-plan-badge');
+                chatPlanBadge.textContent = chatPlan.charAt(0).toUpperCase() + chatPlan.slice(1);
+                chatPlanBadge.className = 'plan-badge ' + chatPlan;
+
+                const chatUsed = chatSub.messages_used || 0;
+                const chatLimit = chatSub.messages_limit || 1000;
+                document.getElementById('chat-messages-used').textContent = chatUsed.toLocaleString();
+                document.getElementById('chat-messages-limit').textContent = chatLimit.toLocaleString();
+
+                const chatProgress = (chatUsed / chatLimit) * 100;
+                const chatProgressBar = document.getElementById('chat-progress');
+                chatProgressBar.style.width = Math.min(chatProgress, 100) + '%';
+                if (chatProgress > 90) chatProgressBar.style.background = 'var(--warning)';
+
+                // Update RJEPA product card
+                const rjepaPlanBadge = document.getElementById('rjepa-plan-badge');
+                rjepaPlanBadge.textContent = rjepaPlan.charAt(0).toUpperCase() + rjepaPlan.slice(1);
+                rjepaPlanBadge.className = 'plan-badge ' + rjepaPlan;
+
+                const rjepaUsed = rjepaSub.credits_used || 0;
+                const rjepaLimit = rjepaSub.credits || 10000;
+                document.getElementById('rjepa-credits-used').textContent = rjepaUsed.toLocaleString();
+                document.getElementById('rjepa-credits-limit').textContent = rjepaLimit.toLocaleString();
+
+                const rjepaProgress = (rjepaUsed / rjepaLimit) * 100;
+                const rjepaProgressBar = document.getElementById('rjepa-progress');
+                rjepaProgressBar.style.width = Math.min(rjepaProgress, 100) + '%';
+                if (rjepaProgress > 90) rjepaProgressBar.style.background = 'var(--warning)';
+
+                // Count RJEPA tokens
+                const rjepaTokens = (profile.tokens || []).filter(t => t.product === 'rjepa');
+                document.getElementById('rjepa-token-count').textContent = rjepaTokens.length;
+
+                // Update subscription summary
+                document.getElementById('dashboard-chat-plan').textContent = chatPlan.charAt(0).toUpperCase() + chatPlan.slice(1);
+                document.getElementById('dashboard-rjepa-plan').textContent = rjepaPlan.charAt(0).toUpperCase() + rjepaPlan.slice(1);
+
+                // Hide upgrade button for owner
+                const upgradeBtn = document.getElementById('btn-upgrade-main');
+                if (upgradeBtn && (chatPlan === 'owner' || rjepaPlan === 'owner')) {
+                    upgradeBtn.style.display = 'none';
+                }
+
+                // Handle organization membership
+                if (profile.organization_id) {
+                    document.getElementById('dashboard-org-section').classList.remove('hidden');
+                    document.getElementById('org-role').textContent = profile.organization_role || 'member';
+                    // Fetch org name if needed
+                    try {
+                        const orgResp = await fetch(`${CORS_PROXY_URL}/org/${profile.organization_id}`);
+                        const org = await orgResp.json();
+                        if (org.name) {
+                            document.getElementById('org-name').textContent = org.name;
+                            document.getElementById('dashboard-org-badge').textContent = org.name;
+                            document.getElementById('dashboard-org-badge').style.display = 'inline-block';
+                        }
+                    } catch (e) {
+                        console.log('Could not fetch org:', e);
+                    }
                 }
 
                 // Store profile for later use
@@ -2234,20 +2590,38 @@ flowchart TB
         }
 
         // ═══════════════════════════════════════════════════════════════════════
-        // TOKEN MANAGEMENT
+        // TOKEN MANAGEMENT - MULTI-PRODUCT
         // ═══════════════════════════════════════════════════════════════════════
-        // Tokens are automatically assigned based on subscription plan:
-        //   - Free: 1 token with "chat" scope
-        //   - Pro: 1 token with "chat" + "rjepa" scopes
-        //   - Enterprise: 1 token with all scopes
-        // Users can: view, see usage, regenerate, activate/deactivate
-        // Users cannot: create new tokens or choose scopes
+        // Chat tokens: 1 per user, auto-assigned, regenerate/toggle only
+        // RJEPA tokens: Multiple per user (based on plan), user can create/delete
 
-        // Show tokens modal
-        async function showTokensModal() {
+        let currentTokenProduct = 'chat';
+
+        // Show tokens modal with optional product filter
+        async function showTokensModal(product = 'chat') {
+            currentTokenProduct = product;
             document.getElementById('tokens-modal').classList.remove('hidden');
             document.getElementById('new-token-display').classList.add('hidden');
+            document.getElementById('create-rjepa-form').classList.add('hidden');
+            switchTokenTab(product);
             await loadTokensList();
+        }
+
+        // Switch between Chat and RJEPA tabs
+        function switchTokenTab(product) {
+            currentTokenProduct = product;
+
+            // Update tab styles
+            document.querySelectorAll('.token-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.product === product);
+            });
+
+            // Show/hide sections
+            document.getElementById('chat-tokens-section').classList.toggle('hidden', product !== 'chat');
+            document.getElementById('rjepa-tokens-section').classList.toggle('hidden', product !== 'rjepa');
+
+            // Update plan message based on product
+            updatePlanMessage(product);
         }
 
         // Close tokens modal
@@ -2255,91 +2629,209 @@ flowchart TB
             document.getElementById('tokens-modal').classList.add('hidden');
         }
 
-        // Load tokens list
+        // Update plan message
+        function updatePlanMessage(product) {
+            const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
+            const planMessage = document.getElementById('token-plan-message');
+            const upgradeBtn = document.getElementById('btn-upgrade-tokens');
+
+            const chatPlan = profile.subscriptions?.chat?.plan || 'free';
+            const rjepaPlan = profile.subscriptions?.rjepa?.plan || 'free';
+            const plan = product === 'chat' ? chatPlan : rjepaPlan;
+
+            const planMessages = {
+                chat: {
+                    free: 'Plan Free : 1,000 messages/mois.',
+                    pro: 'Plan Pro : messages illimités.',
+                    enterprise: 'Plan Enterprise : messages illimités via organisation.',
+                    owner: 'Plan Owner : accès complet.'
+                },
+                rjepa: {
+                    free: 'Plan Free : 10,000 crédits, 1 token max.',
+                    pro: 'Plan Pro : 100,000 crédits, 5 tokens max.',
+                    enterprise: 'Plan Enterprise : crédits illimités, 20 tokens max.',
+                    owner: 'Plan Owner : accès complet, tokens illimités.'
+                }
+            };
+
+            planMessage.textContent = planMessages[product]?.[plan] || planMessages[product]?.free;
+
+            if (upgradeBtn) {
+                upgradeBtn.style.display = ['owner', 'enterprise'].includes(plan) ? 'none' : 'inline-block';
+            }
+        }
+
+        // Load tokens list by product
         async function loadTokensList() {
             const user = JSON.parse(localStorage.getItem('github_user'));
             const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
             if (!user) return;
 
-            const tokenList = document.getElementById('token-list');
-            const planMessage = document.getElementById('token-plan-message');
+            const chatList = document.getElementById('chat-token-list');
+            const rjepaList = document.getElementById('rjepa-token-list');
 
-            tokenList.innerHTML = '<li class="token-loading">' +
-                (currentLang === 'fr' ? 'Chargement...' : 'Loading...') + '</li>';
+            chatList.innerHTML = '<li class="token-loading">Chargement...</li>';
+            rjepaList.innerHTML = '<li class="token-loading">Chargement...</li>';
 
             try {
                 const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens`);
                 const data = await response.json();
 
-                // Update plan message
-                const plan = profile.subscription?.plan || 'free';
-                const planMessages = {
-                    free: currentLang === 'fr'
-                        ? 'Plan Free : accès Chat API uniquement. Upgradez pour accéder à R-JEPA API.'
-                        : 'Free plan: Chat API access only. Upgrade for R-JEPA API access.',
-                    pro: currentLang === 'fr'
-                        ? 'Plan Pro : accès Chat + R-JEPA API.'
-                        : 'Pro plan: Chat + R-JEPA API access.',
-                    enterprise: currentLang === 'fr'
-                        ? 'Plan Enterprise : accès complet à toutes les APIs.'
-                        : 'Enterprise plan: Full access to all APIs.',
-                    owner: currentLang === 'fr'
-                        ? 'Plan Owner : accès administrateur complet.'
-                        : 'Owner plan: Full admin access.'
-                };
-                planMessage.textContent = planMessages[plan] || planMessages.free;
+                const allTokens = data.tokens || [];
+                const chatTokens = allTokens.filter(t => t.product === 'chat' || !t.product);
+                const rjepaTokens = allTokens.filter(t => t.product === 'rjepa');
 
-                // Hide upgrade button for owner/enterprise (they have full access)
-                const upgradeBtn = document.getElementById('btn-upgrade-tokens');
-                if (upgradeBtn) {
-                    upgradeBtn.style.display = ['owner', 'enterprise'].includes(plan) ? 'none' : 'inline-block';
-                }
-
-                if (data.tokens && data.tokens.length > 0) {
-                    tokenList.innerHTML = data.tokens.map(token => {
-                        const isActive = token.status === 'active';
-                        const statusBadge = isActive
-                            ? `<span class="token-status-badge token-status-active">${currentLang === 'fr' ? 'Actif' : 'Active'}</span>`
-                            : `<span class="token-status-badge token-status-inactive">${currentLang === 'fr' ? 'Inactif' : 'Inactive'}</span>`;
-
-                        return `
-                            <li class="token-item">
-                                <div class="token-info">
-                                    <div class="token-name">
-                                        ${escapeHtml(token.name)} ${statusBadge}
-                                    </div>
-                                    <div class="token-meta">
-                                        ${currentLang === 'fr' ? 'Créé le' : 'Created'} ${token.created_at}
-                                        ${token.last_used ? ` • ${currentLang === 'fr' ? 'Dernier usage' : 'Last used'} ${token.last_used}` : ''}
-                                    </div>
-                                    <div class="token-scopes">
-                                        ${(token.scopes || []).map(s => `<span class="scope-badge">${s}</span>`).join('')}
-                                    </div>
-                                    <div class="token-usage">
-                                        <span class="usage-stat">
-                                            ${currentLang === 'fr' ? 'Appels' : 'Calls'}: <strong>${(token.usage || 0).toLocaleString()}</strong>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="token-actions">
-                                    <button class="btn-secondary-small" onclick="regenerateToken('${token.id}')" title="${currentLang === 'fr' ? 'Régénérer' : 'Regenerate'}">
-                                        🔄
-                                    </button>
-                                    <button class="btn-secondary-small" onclick="toggleToken('${token.id}', ${!isActive})" title="${isActive ? (currentLang === 'fr' ? 'Désactiver' : 'Deactivate') : (currentLang === 'fr' ? 'Activer' : 'Activate')}">
-                                        ${isActive ? '⏸️' : '▶️'}
-                                    </button>
-                                </div>
-                            </li>
-                        `;
-                    }).join('');
+                // Render Chat tokens
+                if (chatTokens.length > 0) {
+                    chatList.innerHTML = chatTokens.map(token => renderTokenItem(token, false)).join('');
                 } else {
-                    tokenList.innerHTML = '<li class="token-empty">' +
-                        (currentLang === 'fr' ? 'Aucun token assigné. Contactez le support.' : 'No tokens assigned. Contact support.') + '</li>';
+                    chatList.innerHTML = '<li class="token-empty">Aucun token Chat. Contactez le support.</li>';
                 }
+
+                // Render RJEPA tokens
+                if (rjepaTokens.length > 0) {
+                    rjepaList.innerHTML = rjepaTokens.map(token => renderTokenItem(token, true)).join('');
+                } else {
+                    rjepaList.innerHTML = '<li class="token-empty">Aucun token RJEPA. Créez-en un ci-dessus.</li>';
+                }
+
+                // Update RJEPA token count and limit
+                const rjepaPlan = profile.subscriptions?.rjepa?.plan || 'free';
+                const maxTokens = { free: 1, pro: 5, enterprise: 20, owner: 999 }[rjepaPlan] || 1;
+                document.getElementById('rjepa-tokens-count').textContent = rjepaTokens.length;
+                document.getElementById('rjepa-tokens-max').textContent = maxTokens;
+
+                // Hide/show create button based on limit
+                const createBtn = document.getElementById('btn-create-rjepa-token');
+                if (createBtn) {
+                    createBtn.style.display = rjepaTokens.length >= maxTokens ? 'none' : 'inline-block';
+                }
+
+                updatePlanMessage(currentTokenProduct);
+
             } catch (error) {
                 console.error('Error loading tokens:', error);
-                tokenList.innerHTML = '<li class="token-empty">' +
-                    (currentLang === 'fr' ? 'Erreur de chargement' : 'Error loading tokens') + '</li>';
+                chatList.innerHTML = '<li class="token-empty">Erreur de chargement</li>';
+                rjepaList.innerHTML = '<li class="token-empty">Erreur de chargement</li>';
+            }
+        }
+
+        // Render a single token item
+        function renderTokenItem(token, canDelete = false) {
+            const isActive = token.status === 'active';
+            const statusBadge = isActive
+                ? '<span class="token-status-badge token-status-active">Actif</span>'
+                : '<span class="token-status-badge token-status-inactive">Inactif</span>';
+
+            const deleteBtn = canDelete
+                ? `<button class="btn-secondary-small btn-delete" onclick="deleteRjepaToken('${token.id}')" title="Supprimer">🗑️</button>`
+                : '';
+
+            return `
+                <li class="token-item">
+                    <div class="token-info">
+                        <div class="token-name">
+                            ${escapeHtml(token.name)} ${statusBadge}
+                        </div>
+                        <div class="token-meta">
+                            Créé le ${token.created_at}
+                            ${token.last_used ? ` • Dernier usage ${token.last_used}` : ''}
+                        </div>
+                        <div class="token-usage">
+                            <span class="usage-stat">
+                                Appels: <strong>${(token.usage || 0).toLocaleString()}</strong>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="token-actions">
+                        <button class="btn-secondary-small" onclick="regenerateToken('${token.id}')" title="Régénérer">
+                            🔄
+                        </button>
+                        <button class="btn-secondary-small" onclick="toggleToken('${token.id}', ${!isActive})" title="${isActive ? 'Désactiver' : 'Activer'}">
+                            ${isActive ? '⏸️' : '▶️'}
+                        </button>
+                        ${deleteBtn}
+                    </div>
+                </li>
+            `;
+        }
+
+        // Show RJEPA token creation form
+        function showCreateRjepaToken() {
+            document.getElementById('create-rjepa-form').classList.remove('hidden');
+            document.getElementById('rjepa-token-name').focus();
+        }
+
+        // Hide RJEPA token creation form
+        function hideCreateRjepaToken() {
+            document.getElementById('create-rjepa-form').classList.add('hidden');
+            document.getElementById('rjepa-token-name').value = '';
+        }
+
+        // Create new RJEPA token
+        async function createRjepaToken() {
+            const user = JSON.parse(localStorage.getItem('github_user'));
+            if (!user) return;
+
+            const name = document.getElementById('rjepa-token-name').value.trim();
+            if (!name) {
+                alert('Veuillez entrer un nom pour le token.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, product: 'rjepa' })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.token) {
+                    // Show the new token value
+                    document.getElementById('new-token-value').textContent = data.token.value;
+                    document.getElementById('new-token-display').classList.remove('hidden');
+                    hideCreateRjepaToken();
+                    await loadTokensList();
+
+                    // Refresh dashboard count
+                    const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
+                    if (profile.tokens) {
+                        profile.tokens.push(data.token);
+                        localStorage.setItem('user_profile', JSON.stringify(profile));
+                    }
+                } else {
+                    alert(data.error || 'Erreur lors de la création du token');
+                }
+            } catch (error) {
+                console.error('Error creating token:', error);
+                alert('Erreur lors de la création du token');
+            }
+        }
+
+        // Delete RJEPA token
+        async function deleteRjepaToken(tokenId) {
+            const user = JSON.parse(localStorage.getItem('github_user'));
+            if (!user) return;
+
+            if (!confirm('Supprimer ce token ? Cette action est irréversible.')) return;
+
+            try {
+                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens/${tokenId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    await loadTokensList();
+                } else {
+                    alert(data.error || 'Erreur lors de la suppression');
+                }
+            } catch (error) {
+                console.error('Error deleting token:', error);
+                alert('Erreur lors de la suppression du token');
             }
         }
 
