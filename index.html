@@ -1553,6 +1553,7 @@ flowchart TB
                     });
 
                     const data = await response.json();
+                    console.log('Poll response:', data); // DEBUG
 
                     if (data.access_token) {
                         // Success!
