@@ -1480,7 +1480,7 @@
             <!-- Plan Info -->
             <div class="token-plan-info">
                 <p id="token-plan-message" class="plan-message"></p>
-                <button onclick="showUpgradeModal()" class="btn-small btn-upgrade" data-i18n="tokens.upgradeForMore">
+                <button id="btn-upgrade-tokens" onclick="showUpgradeModal()" class="btn-small btn-upgrade" data-i18n="tokens.upgradeForMore">
                     Upgrade for more access
                 </button>
             </div>
@@ -2288,6 +2288,12 @@ flowchart TB
                         : 'Owner plan: Full admin access.'
                 };
                 planMessage.textContent = planMessages[plan] || planMessages.free;
+
+                // Hide upgrade button for owner/enterprise (they have full access)
+                const upgradeBtn = document.getElementById('btn-upgrade-tokens');
+                if (upgradeBtn) {
+                    upgradeBtn.style.display = ['owner', 'enterprise'].includes(plan) ? 'none' : 'inline-block';
+                }
 
                 if (data.tokens && data.tokens.length > 0) {
                     tokenList.innerHTML = data.tokens.map(token => {
