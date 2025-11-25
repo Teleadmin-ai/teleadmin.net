@@ -1202,6 +1202,73 @@
             padding: 2rem;
         }
 
+        .token-plan-info {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            text-align: center;
+        }
+
+        .plan-message {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .token-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary-small {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary-small:hover {
+            background: rgba(99, 102, 241, 0.3);
+        }
+
+        .token-usage {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .usage-stat {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .usage-stat strong {
+            color: var(--accent);
+        }
+
+        .token-status-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .token-status-active {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--success);
+        }
+
+        .token-status-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
         /* Upgrade Modal */
         .plans-grid {
             display: grid;
@@ -1388,23 +1455,9 @@
         <div class="modal-content modal-large">
             <button class="modal-close" onclick="closeTokensModal()">&times;</button>
             <h2 data-i18n="tokens.title">API Tokens</h2>
-            <p data-i18n="tokens.description">Manage your API tokens for accessing Teleadmin services.</p>
+            <p data-i18n="tokens.description">Your API tokens are automatically assigned based on your subscription plan.</p>
 
-            <!-- Create Token Form -->
-            <div class="token-create-form">
-                <h4 data-i18n="tokens.createNew">Create New Token</h4>
-                <div class="form-row">
-                    <input type="text" id="new-token-name" placeholder="Token name (e.g. Production)" class="form-input">
-                    <select id="new-token-scopes" class="form-select" multiple>
-                        <option value="chat" selected>Chat API</option>
-                        <option value="rjepa">R-JEPA API</option>
-                        <option value="admin">Admin API</option>
-                    </select>
-                    <button onclick="createToken()" class="btn-small" data-i18n="tokens.create">Create</button>
-                </div>
-            </div>
-
-            <!-- New Token Display (shown once after creation) -->
+            <!-- New Token Display (shown after regeneration) -->
             <div id="new-token-display" class="new-token-display hidden">
                 <div class="token-warning">
                     <span class="warning-icon">⚠️</span>
@@ -1418,10 +1471,18 @@
 
             <!-- Token List -->
             <div class="token-list-container">
-                <h4 data-i18n="tokens.activeTokens">Active Tokens</h4>
+                <h4 data-i18n="tokens.yourTokens">Your Tokens</h4>
                 <ul id="token-list" class="token-list">
                     <li class="token-loading" data-i18n="tokens.loading">Loading tokens...</li>
                 </ul>
+            </div>
+
+            <!-- Plan Info -->
+            <div class="token-plan-info">
+                <p id="token-plan-message" class="plan-message"></p>
+                <button onclick="showUpgradeModal()" class="btn-small btn-upgrade" data-i18n="tokens.upgradeForMore">
+                    Upgrade for more access
+                </button>
             </div>
         </div>
     </div>
@@ -2175,6 +2236,12 @@ flowchart TB
         // ═══════════════════════════════════════════════════════════════════════
         // TOKEN MANAGEMENT
         // ═══════════════════════════════════════════════════════════════════════
+        // Tokens are automatically assigned based on subscription plan:
+        //   - Free: 1 token with "chat" scope
+        //   - Pro: 1 token with "chat" + "rjepa" scopes
+        //   - Enterprise: 1 token with all scopes
+        // Users can: view, see usage, regenerate, activate/deactivate
+        // Users cannot: create new tokens or choose scopes
 
         // Show tokens modal
         async function showTokensModal() {
@@ -2191,9 +2258,12 @@ flowchart TB
         // Load tokens list
         async function loadTokensList() {
             const user = JSON.parse(localStorage.getItem('github_user'));
+            const profile = JSON.parse(localStorage.getItem('user_profile') || '{}');
             if (!user) return;
 
             const tokenList = document.getElementById('token-list');
+            const planMessage = document.getElementById('token-plan-message');
+
             tokenList.innerHTML = '<li class="token-loading">' +
                 (currentLang === 'fr' ? 'Chargement...' : 'Loading...') + '</li>';
 
@@ -2201,27 +2271,64 @@ flowchart TB
                 const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens`);
                 const data = await response.json();
 
+                // Update plan message
+                const plan = profile.subscription?.plan || 'free';
+                const planMessages = {
+                    free: currentLang === 'fr'
+                        ? 'Plan Free : accès Chat API uniquement. Upgradez pour accéder à R-JEPA API.'
+                        : 'Free plan: Chat API access only. Upgrade for R-JEPA API access.',
+                    pro: currentLang === 'fr'
+                        ? 'Plan Pro : accès Chat + R-JEPA API.'
+                        : 'Pro plan: Chat + R-JEPA API access.',
+                    enterprise: currentLang === 'fr'
+                        ? 'Plan Enterprise : accès complet à toutes les APIs.'
+                        : 'Enterprise plan: Full access to all APIs.',
+                    owner: currentLang === 'fr'
+                        ? 'Plan Owner : accès administrateur complet.'
+                        : 'Owner plan: Full admin access.'
+                };
+                planMessage.textContent = planMessages[plan] || planMessages.free;
+
                 if (data.tokens && data.tokens.length > 0) {
-                    tokenList.innerHTML = data.tokens.map(token => `
-                        <li class="token-item">
-                            <div class="token-info">
-                                <div class="token-name">${escapeHtml(token.name)}</div>
-                                <div class="token-meta">
-                                    ${currentLang === 'fr' ? 'Créé le' : 'Created'} ${token.created_at}
-                                    ${token.last_used ? ` • ${currentLang === 'fr' ? 'Utilisé le' : 'Last used'} ${token.last_used}` : ''}
+                    tokenList.innerHTML = data.tokens.map(token => {
+                        const isActive = token.status === 'active';
+                        const statusBadge = isActive
+                            ? `<span class="token-status-badge token-status-active">${currentLang === 'fr' ? 'Actif' : 'Active'}</span>`
+                            : `<span class="token-status-badge token-status-inactive">${currentLang === 'fr' ? 'Inactif' : 'Inactive'}</span>`;
+
+                        return `
+                            <li class="token-item">
+                                <div class="token-info">
+                                    <div class="token-name">
+                                        ${escapeHtml(token.name)} ${statusBadge}
+                                    </div>
+                                    <div class="token-meta">
+                                        ${currentLang === 'fr' ? 'Créé le' : 'Created'} ${token.created_at}
+                                        ${token.last_used ? ` • ${currentLang === 'fr' ? 'Dernier usage' : 'Last used'} ${token.last_used}` : ''}
+                                    </div>
+                                    <div class="token-scopes">
+                                        ${(token.scopes || []).map(s => `<span class="scope-badge">${s}</span>`).join('')}
+                                    </div>
+                                    <div class="token-usage">
+                                        <span class="usage-stat">
+                                            ${currentLang === 'fr' ? 'Appels' : 'Calls'}: <strong>${(token.usage || 0).toLocaleString()}</strong>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="token-scopes">
-                                    ${(token.scopes || []).map(s => `<span class="scope-badge">${s}</span>`).join('')}
+                                <div class="token-actions">
+                                    <button class="btn-secondary-small" onclick="regenerateToken('${token.id}')" title="${currentLang === 'fr' ? 'Régénérer' : 'Regenerate'}">
+                                        🔄
+                                    </button>
+                                    <button class="btn-secondary-small" onclick="toggleToken('${token.id}', ${!isActive})" title="${isActive ? (currentLang === 'fr' ? 'Désactiver' : 'Deactivate') : (currentLang === 'fr' ? 'Activer' : 'Activate')}">
+                                        ${isActive ? '⏸️' : '▶️'}
+                                    </button>
                                 </div>
-                            </div>
-                            <button class="btn-danger" onclick="deleteToken('${token.id}')">
-                                ${currentLang === 'fr' ? 'Révoquer' : 'Revoke'}
-                            </button>
-                        </li>
-                    `).join('');
+                            </li>
+                        `;
+                    }).join('');
                 } else {
                     tokenList.innerHTML = '<li class="token-empty">' +
-                        (currentLang === 'fr' ? 'Aucun token. Créez-en un ci-dessus.' : 'No tokens yet. Create one above.') + '</li>';
+                        (currentLang === 'fr' ? 'Aucun token assigné. Contactez le support.' : 'No tokens assigned. Contact support.') + '</li>';
                 }
             } catch (error) {
                 console.error('Error loading tokens:', error);
@@ -2230,89 +2337,60 @@ flowchart TB
             }
         }
 
-        // Create new token
-        async function createToken() {
+        // Regenerate token (new value, same scopes)
+        async function regenerateToken(tokenId) {
             const user = JSON.parse(localStorage.getItem('github_user'));
             if (!user) return;
 
-            const nameInput = document.getElementById('new-token-name');
-            const scopesSelect = document.getElementById('new-token-scopes');
-            const name = nameInput.value.trim();
+            const confirmMsg = currentLang === 'fr'
+                ? 'Régénérer ce token ? L\'ancien token sera invalidé immédiatement.'
+                : 'Regenerate this token? The old token will be invalidated immediately.';
 
-            if (!name) {
-                alert(currentLang === 'fr' ? 'Entrez un nom pour le token' : 'Please enter a token name');
-                return;
-            }
-
-            const scopes = Array.from(scopesSelect.selectedOptions).map(o => o.value);
+            if (!confirm(confirmMsg)) return;
 
             try {
-                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, scopes })
+                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens/${tokenId}/regenerate`, {
+                    method: 'POST'
                 });
 
                 const data = await response.json();
 
                 if (data.success && data.token) {
-                    // Show the new token (only shown once!)
+                    // Show the new token value
                     document.getElementById('new-token-value').textContent = data.token.value;
                     document.getElementById('new-token-display').classList.remove('hidden');
-
-                    // Clear form
-                    nameInput.value = '';
-
-                    // Reload list
                     await loadTokensList();
-
-                    // Update dashboard count
-                    const countEl = document.getElementById('dashboard-token-count');
-                    if (countEl) {
-                        countEl.textContent = parseInt(countEl.textContent) + 1;
-                    }
                 } else {
-                    alert(data.error || 'Error creating token');
+                    alert(data.error || 'Error regenerating token');
                 }
             } catch (error) {
-                console.error('Error creating token:', error);
-                alert(currentLang === 'fr' ? 'Erreur lors de la création' : 'Error creating token');
+                console.error('Error regenerating token:', error);
+                alert(currentLang === 'fr' ? 'Erreur lors de la régénération' : 'Error regenerating token');
             }
         }
 
-        // Delete token
-        async function deleteToken(tokenId) {
+        // Toggle token active/inactive
+        async function toggleToken(tokenId, activate) {
             const user = JSON.parse(localStorage.getItem('github_user'));
             if (!user) return;
 
-            const confirmMsg = currentLang === 'fr'
-                ? 'Êtes-vous sûr de vouloir révoquer ce token ? Cette action est irréversible.'
-                : 'Are you sure you want to revoke this token? This cannot be undone.';
-
-            if (!confirm(confirmMsg)) return;
-
             try {
-                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens/${tokenId}`, {
-                    method: 'DELETE'
+                const response = await fetch(`${CORS_PROXY_URL}/user/${user.id}/tokens/${tokenId}/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ active: activate })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
                     await loadTokensList();
-
-                    // Update dashboard count
-                    const countEl = document.getElementById('dashboard-token-count');
-                    if (countEl) {
-                        const current = parseInt(countEl.textContent);
-                        countEl.textContent = Math.max(0, current - 1);
-                    }
                 } else {
-                    alert(data.error || 'Error deleting token');
+                    alert(data.error || 'Error updating token');
                 }
             } catch (error) {
-                console.error('Error deleting token:', error);
-                alert(currentLang === 'fr' ? 'Erreur lors de la suppression' : 'Error deleting token');
+                console.error('Error toggling token:', error);
+                alert(currentLang === 'fr' ? 'Erreur lors de la mise à jour' : 'Error updating token');
             }
         }
 
