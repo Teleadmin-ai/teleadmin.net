@@ -905,6 +905,96 @@
             font-size: 0.85rem;
         }
 
+        .user-profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .dashboard-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-card);
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: background 0.3s;
+        }
+
+        .btn-small:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-upgrade {
+            background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+        }
+
+        .btn-upgrade:hover {
+            background: linear-gradient(135deg, #f97316 0%, var(--warning) 100%);
+        }
+
+        .dashboard-actions {
+            margin-top: 2rem;
+        }
+
+        .dashboard-actions h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--bg-card);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 1.5rem;
+        }
+
         .token-list {
             list-style: none;
         }
@@ -1076,6 +1166,73 @@
                     </a>
                     <a href="https://cyberplace.ai" class="btn btn-secondary" target="_blank" data-i18n="hero.resources">
                         Ressources AI
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section (visible only when logged in) -->
+        <section class="section dashboard-section hidden" id="dashboard">
+            <div class="dashboard-header">
+                <h2 data-i18n="dashboard.title">Tableau de bord</h2>
+                <span class="hero-badge" id="dashboard-plan">Free</span>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- User Info Card -->
+                <div class="dashboard-card">
+                    <h4 data-i18n="dashboard.profile">Profil</h4>
+                    <div class="user-profile-info">
+                        <img id="dashboard-avatar" src="" alt="Avatar" class="dashboard-avatar">
+                        <div>
+                            <div class="value" id="dashboard-username">-</div>
+                            <div class="label" id="dashboard-email">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Usage Card -->
+                <div class="dashboard-card">
+                    <h4 data-i18n="dashboard.apiUsage">Utilisation API</h4>
+                    <div class="value" id="dashboard-api-calls">0</div>
+                    <div class="label"><span id="dashboard-api-limit">1,000</span> <span data-i18n="dashboard.callsPerMonth">appels/mois</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="dashboard-api-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Tokens Card -->
+                <div class="dashboard-card">
+                    <h4 data-i18n="dashboard.tokens">Tokens API</h4>
+                    <div class="value" id="dashboard-token-count">0</div>
+                    <div class="label" data-i18n="dashboard.activeTokens">tokens actifs</div>
+                    <button class="btn-small" onclick="showTokensModal()" data-i18n="dashboard.manageTokens">Gerer</button>
+                </div>
+
+                <!-- Subscription Card -->
+                <div class="dashboard-card">
+                    <h4 data-i18n="dashboard.subscription">Abonnement</h4>
+                    <div class="value" id="dashboard-plan-name">Free</div>
+                    <div class="label" id="dashboard-plan-expires">-</div>
+                    <button class="btn-small btn-upgrade" onclick="showUpgradeModal()" data-i18n="dashboard.upgrade">Upgrader</button>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="dashboard-actions">
+                <h3 data-i18n="dashboard.quickActions">Actions rapides</h3>
+                <div class="action-buttons">
+                    <a href="https://cognition4chat.com" class="action-btn" target="_blank">
+                        <span class="action-icon">💬</span>
+                        <span data-i18n="dashboard.openChat">Ouvrir Chat AI</span>
+                    </a>
+                    <a href="https://cognition4ai.com" class="action-btn" target="_blank">
+                        <span class="action-icon">🧠</span>
+                        <span data-i18n="dashboard.openRJEPA">R-JEPA API</span>
+                    </a>
+                    <a href="https://cyberplace.ai" class="action-btn" target="_blank">
+                        <span class="action-icon">📚</span>
+                        <span data-i18n="dashboard.openDocs">Documentation</span>
                     </a>
                 </div>
             </div>
@@ -1609,11 +1766,71 @@ flowchart TB
 
         // Show logged in state
         function showLoggedInState(user) {
+            // Update navbar
             document.getElementById('login-btn').classList.add('hidden');
             document.getElementById('user-menu').classList.remove('hidden');
             document.getElementById('user-avatar-img').src = user.avatar_url;
             document.getElementById('user-name').textContent = user.name || user.login;
             document.getElementById('user-login').textContent = '@' + user.login;
+
+            // Show and populate dashboard
+            const dashboard = document.getElementById('dashboard');
+            if (dashboard) {
+                dashboard.classList.remove('hidden');
+
+                // Populate dashboard with user data
+                document.getElementById('dashboard-avatar').src = user.avatar_url;
+                document.getElementById('dashboard-username').textContent = user.name || user.login;
+                document.getElementById('dashboard-email').textContent = user.email || '@' + user.login;
+
+                // Load user profile data (mock for now - will be from repo later)
+                loadUserProfile(user.id);
+            }
+        }
+
+        // Load user profile from storage (mock data for now)
+        function loadUserProfile(githubId) {
+            // TODO: Load from teleadmin.net-private/users/github_{id}.json
+            // For now, use mock data
+            const mockProfile = {
+                plan: 'Free',
+                apiCalls: 150,
+                apiLimit: 1000,
+                tokens: 0,
+                expires: null
+            };
+
+            document.getElementById('dashboard-plan').textContent = mockProfile.plan;
+            document.getElementById('dashboard-plan-name').textContent = mockProfile.plan;
+            document.getElementById('dashboard-api-calls').textContent = mockProfile.apiCalls.toLocaleString();
+            document.getElementById('dashboard-api-limit').textContent = mockProfile.apiLimit.toLocaleString();
+            document.getElementById('dashboard-token-count').textContent = mockProfile.tokens;
+
+            // Update progress bar
+            const progress = (mockProfile.apiCalls / mockProfile.apiLimit) * 100;
+            document.getElementById('dashboard-api-progress').style.width = progress + '%';
+
+            if (mockProfile.expires) {
+                document.getElementById('dashboard-plan-expires').textContent =
+                    currentLang === 'fr' ? 'Expire le ' + mockProfile.expires : 'Expires ' + mockProfile.expires;
+            } else {
+                document.getElementById('dashboard-plan-expires').textContent =
+                    currentLang === 'fr' ? 'Pas d\'expiration' : 'No expiration';
+            }
+        }
+
+        // Show tokens modal (placeholder)
+        function showTokensModal() {
+            alert(currentLang === 'fr'
+                ? 'Gestion des tokens API - Bientot disponible !'
+                : 'API Token Management - Coming soon!');
+        }
+
+        // Show upgrade modal (placeholder)
+        function showUpgradeModal() {
+            alert(currentLang === 'fr'
+                ? 'Upgrade vers Pro - Bientot disponible !'
+                : 'Upgrade to Pro - Coming soon!');
         }
 
         // Toggle user dropdown
@@ -1635,6 +1852,11 @@ flowchart TB
             document.getElementById('login-btn').classList.remove('hidden');
             document.getElementById('user-menu').classList.add('hidden');
             document.getElementById('user-dropdown').classList.add('hidden');
+            // Hide dashboard
+            const dashboard = document.getElementById('dashboard');
+            if (dashboard) {
+                dashboard.classList.add('hidden');
+            }
         }
 
         // Close modal
@@ -1662,7 +1884,20 @@ flowchart TB
             "auth.modal.title": "Login with GitHub",
             "auth.modal.instructions": "Enter this code on GitHub:",
             "auth.modal.open": "Open GitHub",
-            "auth.modal.waiting": "Waiting for authorization..."
+            "auth.modal.waiting": "Waiting for authorization...",
+            "dashboard.title": "Dashboard",
+            "dashboard.profile": "Profile",
+            "dashboard.apiUsage": "API Usage",
+            "dashboard.callsPerMonth": "calls/month",
+            "dashboard.tokens": "API Tokens",
+            "dashboard.activeTokens": "active tokens",
+            "dashboard.manageTokens": "Manage",
+            "dashboard.subscription": "Subscription",
+            "dashboard.upgrade": "Upgrade",
+            "dashboard.quickActions": "Quick Actions",
+            "dashboard.openChat": "Open AI Chat",
+            "dashboard.openRJEPA": "R-JEPA API",
+            "dashboard.openDocs": "Documentation"
         });
 
         Object.assign(translations.fr, {
@@ -1672,7 +1907,20 @@ flowchart TB
             "auth.modal.title": "Connexion avec GitHub",
             "auth.modal.instructions": "Entrez ce code sur GitHub :",
             "auth.modal.open": "Ouvrir GitHub",
-            "auth.modal.waiting": "En attente d'autorisation..."
+            "auth.modal.waiting": "En attente d'autorisation...",
+            "dashboard.title": "Tableau de bord",
+            "dashboard.profile": "Profil",
+            "dashboard.apiUsage": "Utilisation API",
+            "dashboard.callsPerMonth": "appels/mois",
+            "dashboard.tokens": "Tokens API",
+            "dashboard.activeTokens": "tokens actifs",
+            "dashboard.manageTokens": "Gerer",
+            "dashboard.subscription": "Abonnement",
+            "dashboard.upgrade": "Upgrader",
+            "dashboard.quickActions": "Actions rapides",
+            "dashboard.openChat": "Ouvrir Chat AI",
+            "dashboard.openRJEPA": "R-JEPA API",
+            "dashboard.openDocs": "Documentation"
         });
 
         // Check auth on page load
