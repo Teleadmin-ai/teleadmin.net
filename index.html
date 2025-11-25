@@ -1532,13 +1532,11 @@ flowchart TB
 
         // Poll for token
         function pollForToken(deviceCode, interval) {
-            console.log('Starting poll with device_code:', deviceCode, 'interval:', interval); // DEBUG
             if (deviceFlowInterval) {
                 clearInterval(deviceFlowInterval);
             }
 
             deviceFlowInterval = setInterval(async () => {
-                console.log('Polling...'); // DEBUG
                 try {
                     // Poll via CORS proxy
                     const response = await fetch(`${CORS_PROXY_URL}/access_token`, {
@@ -1555,7 +1553,6 @@ flowchart TB
                     });
 
                     const data = await response.json();
-                    console.log('Poll response:', data); // DEBUG
 
                     if (data.access_token) {
                         // Success!
@@ -1573,7 +1570,6 @@ flowchart TB
                     } else if (data.error === 'slow_down') {
                         // Need to slow down - restart with new interval
                         const newInterval = data.interval || interval + 5;
-                        console.log('Slowing down, new interval:', newInterval);
                         clearInterval(deviceFlowInterval);
                         pollForToken(deviceCode, newInterval);
                         return; // Exit this interval
@@ -1591,7 +1587,6 @@ flowchart TB
                     console.error('Error details:', error.message, error.stack);
                 }
             }, interval * 1000);
-            console.log('Poll interval started'); // DEBUG
         }
 
         // Fetch user info from GitHub
