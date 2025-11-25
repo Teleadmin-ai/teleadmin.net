@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teleadmin Auth Bridge</title>
+    <style>
+        body { display: none; }
+    </style>
+</head>
+<body>
+    <!--
+    Teleadmin Auth Bridge
+    =====================
+    This invisible page is loaded as an iframe by other Teleadmin sites
+    (cognition4chat.com, cyberplace.ai, cognition4ai.com) to share authentication.
+
+    Usage from other sites:
+
+    1. Load this iframe:
+       <iframe id="auth-bridge" src="https://teleadmin.net/auth-bridge.html" style="display:none"></iframe>
+
+    2. Listen for auth data:
+       window.addEventListener('message', (e) => {
+           if (e.origin !== 'https://teleadmin.net') return;
+           if (e.data.type === 'auth-response') {
+               if (e.data.authenticated) {
+                   // User is logged in
+                   localStorage.setItem('github_token', e.data.token);
+                   localStorage.setItem('github_user', JSON.stringify(e.data.user));
+               }
+           }
+       });
+
+    3. Request auth:
+       document.getElementById('auth-bridge').contentWindow.postMessage(
+           { type: 'get-auth' },
+           'https://teleadmin.net'
+       );
+    -->
+
+    <script>
+        // Allowed origins that can request auth
+        const ALLOWED_ORIGINS = [
+            'https://teleadmin.net',
+            'https://www.teleadmin.net',
+            'https://cognition4chat.com',
+            'https://www.cognition4chat.com',
+            'https://cognition4ai.com',
+            'https://www.cognition4ai.com',
+            'https://cyberplace.ai',
+            'https://www.cyberplace.ai',
+            'http://localhost:5500',
+            'http://127.0.0.1:5500'
+        ];
+
+        // Listen for messages from parent window
+        window.addEventListener('message', function(event) {
+            // Verify origin
+            if (!ALLOWED_ORIGINS.includes(event.origin)) {
+                console.warn('Auth bridge: Origin not allowed:', event.origin);
+                return;
+            }
+
+            const data = event.data;
+
+            // Handle get-auth request
+            if (data.type === 'get-auth') {
+                const token = localStorage.getItem('github_token');
+                const userStr = localStorage.getItem('github_user');
+                const profileStr = localStorage.getItem('user_profile');
+
+                if (token && userStr) {
+                    event.source.postMessage({
+                        type: 'auth-response',
+                        authenticated: true,
+                        token: token,
+                        user: JSON.parse(userStr),
+                        profile: profileStr ? JSON.parse(profileStr) : null
+                    }, event.origin);
+                } else {
+                    event.source.postMessage({
+                        type: 'auth-response',
+                        authenticated: false
+                    }, event.origin);
+                }
+            }
+
+            // Handle set-auth request (for login from other sites)
+            if (data.type === 'set-auth') {
+                if (data.token && data.user) {
+                    localStorage.setItem('github_token', data.token);
+                    localStorage.setItem('github_user', JSON.stringify(data.user));
+                    if (data.profile) {
+                        localStorage.setItem('user_profile', JSON.stringify(data.profile));
+                    }
+                    event.source.postMessage({
+                        type: 'auth-set-response',
+                        success: true
+                    }, event.origin);
+                }
+            }
+
+            // Handle clear-auth request (for logout from other sites)
+            if (data.type === 'clear-auth') {
+                localStorage.removeItem('github_token');
+                localStorage.removeItem('github_user');
+                localStorage.removeItem('user_profile');
+                event.source.postMessage({
+                    type: 'auth-clear-response',
+                    success: true
+                }, event.origin);
+            }
+        });
+
+        // Notify parent that bridge is ready
+        if (window.parent !== window) {
+            window.parent.postMessage({ type: 'auth-bridge-ready' }, '*');
+        }
+    </script>
+</body>
+</html>
