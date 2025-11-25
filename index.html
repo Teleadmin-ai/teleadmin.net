@@ -1788,34 +1788,56 @@ flowchart TB
             }
         }
 
-        // Load user profile from storage (mock data for now)
-        function loadUserProfile(githubId) {
-            // TODO: Load from teleadmin.net-private/users/github_{id}.json
-            // For now, use mock data
-            const mockProfile = {
-                plan: 'Free',
-                apiCalls: 150,
-                apiLimit: 1000,
-                tokens: 0,
-                expires: null
-            };
+        // Load user profile from storage
+        async function loadUserProfile(githubId) {
+            try {
+                const response = await fetch(`${CORS_PROXY_URL}/user/${githubId}`);
+                const profile = await response.json();
 
-            document.getElementById('dashboard-plan').textContent = mockProfile.plan;
-            document.getElementById('dashboard-plan-name').textContent = mockProfile.plan;
-            document.getElementById('dashboard-api-calls').textContent = mockProfile.apiCalls.toLocaleString();
-            document.getElementById('dashboard-api-limit').textContent = mockProfile.apiLimit.toLocaleString();
-            document.getElementById('dashboard-token-count').textContent = mockProfile.tokens;
+                if (profile.error) {
+                    console.error('Error loading profile:', profile.error);
+                    return;
+                }
 
-            // Update progress bar
-            const progress = (mockProfile.apiCalls / mockProfile.apiLimit) * 100;
-            document.getElementById('dashboard-api-progress').style.width = progress + '%';
+                // Update dashboard with profile data
+                const plan = profile.subscription?.plan || 'free';
+                const planDisplay = plan.charAt(0).toUpperCase() + plan.slice(1);
+                const apiCalls = profile.usage?.api_calls || 0;
+                const apiLimit = profile.usage?.api_calls_limit || 1000;
+                const tokenCount = profile.tokens?.length || 0;
+                const expires = profile.subscription?.expires_at;
 
-            if (mockProfile.expires) {
-                document.getElementById('dashboard-plan-expires').textContent =
-                    currentLang === 'fr' ? 'Expire le ' + mockProfile.expires : 'Expires ' + mockProfile.expires;
-            } else {
-                document.getElementById('dashboard-plan-expires').textContent =
-                    currentLang === 'fr' ? 'Pas d\'expiration' : 'No expiration';
+                document.getElementById('dashboard-plan').textContent = planDisplay;
+                document.getElementById('dashboard-plan-name').textContent = planDisplay;
+                document.getElementById('dashboard-api-calls').textContent = apiCalls.toLocaleString();
+                document.getElementById('dashboard-api-limit').textContent = apiLimit.toLocaleString();
+                document.getElementById('dashboard-token-count').textContent = tokenCount;
+
+                // Update progress bar
+                const progress = (apiCalls / apiLimit) * 100;
+                document.getElementById('dashboard-api-progress').style.width = Math.min(progress, 100) + '%';
+
+                // Color progress bar based on usage
+                const progressBar = document.getElementById('dashboard-api-progress');
+                if (progress > 90) {
+                    progressBar.style.background = 'var(--warning)';
+                } else if (progress > 75) {
+                    progressBar.style.background = 'linear-gradient(135deg, var(--warning) 0%, var(--primary) 100%)';
+                }
+
+                if (expires) {
+                    document.getElementById('dashboard-plan-expires').textContent =
+                        currentLang === 'fr' ? 'Expire le ' + expires : 'Expires ' + expires;
+                } else {
+                    document.getElementById('dashboard-plan-expires').textContent =
+                        currentLang === 'fr' ? 'Pas d\'expiration' : 'No expiration';
+                }
+
+                // Store profile for later use
+                localStorage.setItem('user_profile', JSON.stringify(profile));
+
+            } catch (error) {
+                console.error('Error loading user profile:', error);
             }
         }
 
