@@ -667,6 +667,272 @@
         .animate-in {
             animation: fadeInUp 0.6s ease-out forwards;
         }
+
+        /* Auth Section */
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 1rem;
+        }
+
+        .btn-login {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            overflow: hidden;
+            background: var(--bg-card);
+            padding: 0;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .user-dropdown .user-info {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-dropdown .user-info span {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .user-dropdown .user-info small {
+            color: var(--text-muted);
+        }
+
+        .user-dropdown a,
+        .user-dropdown button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .user-dropdown a:hover,
+        .user-dropdown button:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .device-code {
+            font-family: monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            background: var(--bg-dark);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--primary);
+        }
+
+        .device-status {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .device-loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--bg-dark);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            margin: 1rem auto 0;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dashboard Section */
+        .dashboard-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            color: var(--text);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: var(--bg-dark);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .dashboard-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .dashboard-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .dashboard-card .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .token-list {
+            list-style: none;
+        }
+
+        .token-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .token-item .token-name {
+            font-weight: 500;
+        }
+
+        .token-item .token-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 8px;
+        }
     </style>
 
     <!-- Mermaid.js for diagrams -->
@@ -753,8 +1019,45 @@
                 <button class="lang-btn" data-lang="en">EN</button>
                 <button class="lang-btn active" data-lang="fr">FR</button>
             </div>
+            <!-- Auth Button -->
+            <div class="auth-section">
+                <button id="login-btn" class="btn-login" onclick="startDeviceFlow()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span data-i18n="auth.login">Login</span>
+                </button>
+                <div id="user-menu" class="user-menu hidden">
+                    <button class="user-avatar" onclick="toggleUserDropdown()">
+                        <img id="user-avatar-img" src="" alt="Avatar">
+                    </button>
+                    <div id="user-dropdown" class="user-dropdown hidden">
+                        <div class="user-info">
+                            <span id="user-name"></span>
+                            <small id="user-login"></small>
+                        </div>
+                        <a href="#dashboard" onclick="showDashboard()" data-i18n="auth.dashboard">Dashboard</a>
+                        <button onclick="logout()" data-i18n="auth.logout">Logout</button>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
+
+    <!-- Device Flow Modal -->
+    <div id="device-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDeviceModal()">&times;</button>
+            <h2 data-i18n="auth.modal.title">Login with GitHub</h2>
+            <p data-i18n="auth.modal.instructions">Enter this code on GitHub:</p>
+            <div class="device-code" id="device-code">XXXX-XXXX</div>
+            <a id="device-link" href="https://github.com/login/device" target="_blank" class="btn btn-primary">
+                <span data-i18n="auth.modal.open">Open GitHub</span>
+            </a>
+            <p class="device-status" id="device-status" data-i18n="auth.modal.waiting">Waiting for authorization...</p>
+            <div class="device-loader"></div>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -1157,6 +1460,215 @@ flowchart TB
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // GITHUB DEVICE FLOW AUTHENTICATION
+        // ═══════════════════════════════════════════════════════════════════════
+
+        const GITHUB_CLIENT_ID = 'Iv23lihMcRzoWlkE2T67';
+        let deviceFlowInterval = null;
+
+        // Check if user is already logged in
+        function checkAuth() {
+            const token = localStorage.getItem('github_token');
+            const user = localStorage.getItem('github_user');
+
+            if (token && user) {
+                const userData = JSON.parse(user);
+                showLoggedInState(userData);
+            }
+        }
+
+        // Start Device Flow
+        async function startDeviceFlow() {
+            try {
+                // Request device code
+                const response = await fetch('https://github.com/login/device/code', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        client_id: GITHUB_CLIENT_ID,
+                        scope: 'read:user user:email'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.user_code) {
+                    // Show modal with code
+                    document.getElementById('device-code').textContent = data.user_code;
+                    document.getElementById('device-link').href = data.verification_uri;
+                    document.getElementById('device-modal').classList.remove('hidden');
+
+                    // Start polling for token
+                    pollForToken(data.device_code, data.interval || 5);
+                } else {
+                    console.error('Device flow error:', data);
+                    alert('Error starting login. Please try again.');
+                }
+            } catch (error) {
+                console.error('Device flow error:', error);
+                // Fallback: show manual instructions
+                showManualDeviceFlow();
+            }
+        }
+
+        // Fallback for CORS issues
+        function showManualDeviceFlow() {
+            document.getElementById('device-code').textContent = 'MANUAL';
+            document.getElementById('device-modal').classList.remove('hidden');
+            document.getElementById('device-status').textContent =
+                'CORS blocked. Please use the OAuth flow instead.';
+            document.getElementById('device-link').href =
+                `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=read:user%20user:email`;
+            document.getElementById('device-link').querySelector('span').textContent = 'Login via OAuth';
+        }
+
+        // Poll for token
+        function pollForToken(deviceCode, interval) {
+            if (deviceFlowInterval) {
+                clearInterval(deviceFlowInterval);
+            }
+
+            deviceFlowInterval = setInterval(async () => {
+                try {
+                    const response = await fetch('https://github.com/login/oauth/access_token', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            client_id: GITHUB_CLIENT_ID,
+                            device_code: deviceCode,
+                            grant_type: 'urn:ietf:params:oauth:grant-type:device_code'
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.access_token) {
+                        // Success!
+                        clearInterval(deviceFlowInterval);
+                        localStorage.setItem('github_token', data.access_token);
+
+                        // Fetch user info
+                        await fetchUserInfo(data.access_token);
+
+                        closeDeviceModal();
+                    } else if (data.error === 'authorization_pending') {
+                        // Still waiting
+                        document.getElementById('device-status').textContent =
+                            currentLang === 'fr' ? 'En attente d\'autorisation...' : 'Waiting for authorization...';
+                    } else if (data.error === 'slow_down') {
+                        // Need to slow down
+                        interval += 5;
+                    } else if (data.error === 'expired_token') {
+                        clearInterval(deviceFlowInterval);
+                        document.getElementById('device-status').textContent =
+                            currentLang === 'fr' ? 'Code expiré. Réessayez.' : 'Code expired. Please try again.';
+                    } else if (data.error === 'access_denied') {
+                        clearInterval(deviceFlowInterval);
+                        document.getElementById('device-status').textContent =
+                            currentLang === 'fr' ? 'Accès refusé.' : 'Access denied.';
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, interval * 1000);
+        }
+
+        // Fetch user info from GitHub
+        async function fetchUserInfo(token) {
+            try {
+                const response = await fetch('https://api.github.com/user', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const user = await response.json();
+                localStorage.setItem('github_user', JSON.stringify(user));
+                showLoggedInState(user);
+            } catch (error) {
+                console.error('Error fetching user:', error);
+            }
+        }
+
+        // Show logged in state
+        function showLoggedInState(user) {
+            document.getElementById('login-btn').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            document.getElementById('user-avatar-img').src = user.avatar_url;
+            document.getElementById('user-name').textContent = user.name || user.login;
+            document.getElementById('user-login').textContent = '@' + user.login;
+        }
+
+        // Toggle user dropdown
+        function toggleUserDropdown() {
+            document.getElementById('user-dropdown').classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.user-menu')) {
+                document.getElementById('user-dropdown')?.classList.add('hidden');
+            }
+        });
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('github_token');
+            localStorage.removeItem('github_user');
+            document.getElementById('login-btn').classList.remove('hidden');
+            document.getElementById('user-menu').classList.add('hidden');
+            document.getElementById('user-dropdown').classList.add('hidden');
+        }
+
+        // Close modal
+        function closeDeviceModal() {
+            document.getElementById('device-modal').classList.add('hidden');
+            if (deviceFlowInterval) {
+                clearInterval(deviceFlowInterval);
+            }
+        }
+
+        // Show dashboard
+        function showDashboard() {
+            document.getElementById('user-dropdown').classList.add('hidden');
+            const dashboardSection = document.getElementById('dashboard');
+            if (dashboardSection) {
+                dashboardSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Add auth translations
+        Object.assign(translations.en, {
+            "auth.login": "Login",
+            "auth.logout": "Logout",
+            "auth.dashboard": "Dashboard",
+            "auth.modal.title": "Login with GitHub",
+            "auth.modal.instructions": "Enter this code on GitHub:",
+            "auth.modal.open": "Open GitHub",
+            "auth.modal.waiting": "Waiting for authorization..."
+        });
+
+        Object.assign(translations.fr, {
+            "auth.login": "Connexion",
+            "auth.logout": "Deconnexion",
+            "auth.dashboard": "Tableau de bord",
+            "auth.modal.title": "Connexion avec GitHub",
+            "auth.modal.instructions": "Entrez ce code sur GitHub :",
+            "auth.modal.open": "Ouvrir GitHub",
+            "auth.modal.waiting": "En attente d'autorisation..."
+        });
+
+        // Check auth on page load
+        checkAuth();
     </script>
 </body>
 </html>
